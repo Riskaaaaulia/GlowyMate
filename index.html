@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GlowyMate - Daily Skincare Bestie</title>
+  
+  <!-- Tailwind CSS Framework via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Font Inter Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Hubungkan ke Berkas CSS Eksternal (Folder css/style.css) -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-rose-50/50 text-slate-800 min-h-screen flex flex-col justify-between selection:bg-pink-200">
+
+  <!-- ========================================================================== -->
+  <!-- 1. HEADER & NAVBAR -->
+  <!-- ========================================================================== -->
+  <header class="bg-white/80 backdrop-blur-md sticky top-0 z-30 border-b border-pink-100 shadow-sm">
+    <div class="max-w-md mx-auto px-4 py-3 flex justify-between items-center">
+      <div class="flex items-center gap-2">
+        <span class="text-2xl">✨</span>
+        <h1 class="font-black text-lg bg-gradient-to-r from-pink-500 to-rose-400 bg-clip-text text-transparent">GlowyMate</h1>
+      </div>
+      <button onclick="openAboutModal()" class="text-xs bg-pink-100 hover:bg-pink-200 text-pink-600 font-bold px-3 py-1.5 rounded-full transition-all active:scale-95">
+        Tentang Aplikasi
+      </button>
+    </div>
+  </header>
+
+  <!-- ========================================================================== -->
+  <!-- 2. KONTEN UTAMA -->
+  <!-- ========================================================================== -->
+  <main class="max-w-md mx-auto p-4 space-y-5 flex-grow w-full">
+
+    <!-- A. KARTU PROFIL PENGGUNA (LOCALSTORAGE) -->
+    <section id="userSection" class="bg-white p-5 rounded-2xl shadow-sm border border-pink-100 card-hover animate-slide-up">
+      
+      <!-- FORM AKUN -->
+      <div id="authFormView">
+        <div class="flex justify-between items-center mb-3">
+          <h3 class="font-bold text-slate-800 text-sm">👤 Akun GlowyMate</h3>
+          <span class="text-[10px] bg-pink-100 text-pink-600 font-bold px-2 py-0.5 rounded-full">Simpan Profil</span>
+        </div>
+        <p class="text-[11px] text-slate-500 mb-3">Masukan nama dan usiamu agar hasil kuis & rekomendasi tersimpan!</p>
+        
+        <div class="space-y-2">
+          <input type="text" id="inputUsername" placeholder="Nama Panggilanmu..." class="w-full p-2.5 text-xs border border-pink-200 rounded-xl focus:outline-none focus:ring-1 focus:ring-pink-400">
+          <input type="number" id="inputUserAge" placeholder="Usia (contoh: 15)..." class="w-full p-2.5 text-xs border border-pink-200 rounded-xl focus:outline-none focus:ring-1 focus:ring-pink-400">
+          <button onclick="handleLogin()" class="w-full bg-gradient-to-r from-pink-500 to-rose-400 text-white font-bold text-xs py-2.5 rounded-xl hover:opacity-90 transition-all active:scale-95 shadow-sm">
+            ✨ Masuk / Daftar Akun
+          </button>
+        </div>
+      </div>
+
+      <!-- TAMPILAN PROFIL (JIKA SUDAH LOGIN) -->
+      <div id="userProfileView" class="hidden flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-pink-100 text-pink-600 rounded-full flex items-center justify-center font-extrabold text-sm border border-pink-200">
+            <span id="profileAvatar">G</span>
+          </div>
+          <div>
+            <h4 id="profileName" class="font-bold text-xs text-slate-800">Nama Pengguna</h4>
+            <p class="text-[10px] text-slate-500">Usia: <span id="profileAge">-</span> thn • Kulit: <span id="profileSkinType" class="font-semibold text-pink-500">Belum Kuis</span></p>
+          </div>
+        </div>
+        <button onclick="handleLogout()" class="text-[10px] bg-slate-100 hover:bg-rose-100 text-slate-600 hover:text-rose-600 font-bold px-2.5 py-1.5 rounded-lg transition-all border border-slate-200">
+          Keluar
+        </button>
+      </div>
+
+    </section>
+
+    <!-- B. KARTU KUIS INTERAKTIF -->
+    <section id="quizSection" class="bg-white p-5 rounded-2xl shadow-sm border border-pink-100 animate-slide-up">
+      <div id="quizContent">
+        <!-- Konten pertanyaan kuis digenerate oleh script.js -->
+      </div>
+    </section>
+
+    <!-- C. HASIL DIAGNOSIS, BASIC SKINCARE & REKOMENDASI PRODUK -->
+    <section id="resultSection" class="hidden space-y-4 animate-slide-up">
+      
+      <!-- 1. Ringkasan Tipe Kulit -->
+      <div class="bg-gradient-to-r from-pink-500 to-rose-400 text-white p-5 rounded-2xl shadow-sm">
+        <span class="text-[10px] bg-white/20 text-white font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">Hasil Diagnosis</span>
+        <h2 id="skinResultTitle" class="text-base font-extrabold mt-1">Tipe Kulitmu: -</h2>
+        <p class="text-[11px] text-pink-100 mt-1">Sesuai untuk usia <span id="userAgeDisplay">-</span> tahun. Berikut panduan & rekomendasi produk aman untukmu:</p>
+      </div>
+
+      <!-- 2. Badge Bahan Aktif Direkomendasikan -->
+      <div class="bg-white p-4 rounded-2xl shadow-sm border border-pink-100">
+        <h4 class="font-bold text-xs text-slate-800 mb-2">💡 Kandungan Ideal untuk Kulitmu:</h4>
+        <div id="ingredientBadges" class="flex flex-wrap gap-2">
+          <!-- Diisi via JavaScript -->
+        </div>
+      </div>
+
+      <!-- 3. URUTAN BASIC SKINCARE REMAJA -->
+      <div class="bg-white p-4 rounded-2xl shadow-sm border border-pink-100 card-hover">
+        <h3 class="font-bold text-slate-800 text-xs mb-3">🧼 Urutan Basic Skincare Remaja Harian</h3>
+        <div class="grid grid-cols-3 gap-2 text-center">
+          <div class="bg-pink-50 p-2.5 rounded-xl border border-pink-100">
+            <span class="text-lg">1️⃣</span>
+            <h4 class="font-bold text-[11px] text-slate-800 mt-1">Cleanser</h4>
+            <p class="text-[9px] text-slate-500">Cuci Muka</p>
+          </div>
+          <div class="bg-pink-50 p-2.5 rounded-xl border border-pink-100">
+            <span class="text-lg">2️⃣</span>
+            <h4 class="font-bold text-[11px] text-slate-800 mt-1">Moisturizer</h4>
+            <p class="text-[9px] text-slate-500">Pelembab</p>
+          </div>
+          <div class="bg-pink-50 p-2.5 rounded-xl border border-pink-100">
+            <span class="text-lg">3️⃣</span>
+            <h4 class="font-bold text-[11px] text-slate-800 mt-1">Sunscreen</h4>
+            <p class="text-[9px] text-slate-500">Pelindung UV</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Daftar Rekomendasi Produk -->
+      <div>
+        <h3 class="font-bold text-slate-800 text-xs mb-3 flex justify-between items-center">
+          <span>🛍️ Rekomendasi Produk Aman</span>
+          <span class="text-[10px] text-pink-500 font-normal">Sesuai Usia & Kulit</span>
+        </h3>
+        <div id="productList" class="space-y-3">
+          <!-- Diisi via JavaScript dari Google Sheets -->
+        </div>
+      </div>
+
+      <!-- Tombol Ulangi Kuis -->
+      <button onclick="resetQuiz()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs py-3 rounded-xl transition-all">
+        🔄 Ulangi Kuis Skincare
+      </button>
+
+    </section>
+
+  </main>
+
+  <!-- ========================================================================== -->
+  <!-- 3. GLOWYBOT AI WIDGET -->
+  <!-- ========================================================================== -->
+  <div class="fixed bottom-4 right-4 z-40 max-w-[320px] w-full px-2">
+    <div id="chatBox" class="hidden bg-white rounded-2xl shadow-xl border border-pink-200 p-4 mb-3 space-y-3 animate-slide-up">
+      <div class="flex justify-between items-center border-b border-pink-100 pb-2">
+        <div class="flex items-center gap-2">
+          <span class="text-base">🤖</span>
+          <div>
+            <h4 class="font-bold text-xs text-slate-800">GlowyBot AI</h4>
+            <p class="text-[9px] text-pink-500">Asisten Skincare Remaja</p>
+          </div>
+        </div>
+        <button onclick="toggleChat()" class="text-slate-400 hover:text-slate-600 text-xs font-bold">✕</button>
+      </div>
+      
+      <div id="chatMessages" class="h-44 overflow-y-auto space-y-2 text-xs p-1">
+        <div class="bg-pink-100 text-slate-700 p-2.5 rounded-xl rounded-tl-none max-w-[85%]">
+          Halo! Ada yang ingin kamu tanyakan seputar skincare remaja? 🌸
+        </div>
+      </div>
+
+      <div class="flex gap-2">
+        <input type="text" id="chatInput" placeholder="Tanya GlowyBot..." class="w-full p-2 text-xs border border-pink-200 rounded-xl focus:outline-none focus:ring-1 focus:ring-pink-400" onkeypress="if(event.key==='Enter') sendChatMessage()">
+        <button onclick="sendChatMessage()" class="bg-pink-500 hover:bg-pink-600 text-white font-bold px-3 py-2 rounded-xl text-xs transition-all">
+          Kirim
+        </button>
+      </div>
+    </div>
+
+    <button onclick="toggleChat()" class="ml-auto flex items-center gap-2 bg-gradient-to-r from-pink-500 to-rose-400 text-white font-bold px-4 py-3 rounded-full shadow-lg hover:opacity-95 transition-all active:scale-95 text-xs">
+      <span>💬 Tanya GlowyBot</span>
+    </button>
+  </div>
+
+  <!-- ========================================================================== -->
+  <!-- 4. MODAL ABOUT -->
+  <!-- ========================================================================== -->
+  <div id="aboutModal" class="hidden fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-sm w-full p-5 space-y-3 shadow-2xl animate-slide-up">
+      <h3 class="font-extrabold text-sm text-slate-800">✨ Tentang GlowyMate</h3>
+      <p class="text-xs text-slate-600 leading-relaxed">
+        GlowyMate adalah aplikasi pemandu skincare khusus remaja yang aman, ramah pemula, dan disesuaikan dengan kebutuhan usia.
+      </p>
+      <div class="bg-pink-50 p-3 rounded-xl border border-pink-100 text-[11px] text-slate-600 space-y-1">
+        <p><strong>Database:</strong> Google Sheets API Integration</p>
+        <p><strong>Storage:</strong> Web LocalStorage</p>
+        <p><strong>Styling:</strong> External CSS & Tailwind Framework</p>
+      </div>
+      <button onclick="closeAboutModal()" class="w-full bg-pink-500 text-white font-bold text-xs py-2.5 rounded-xl hover:bg-pink-600 transition-all">
+        Tutup
+      </button>
+    </div>
+  </div>
+
+  <!-- ========================================================================== -->
+  <!-- 5. FOOTER & SCRIPT HUBUNGAN -->
+  <!-- ========================================================================== -->
+  <footer class="bg-white border-t border-pink-100 py-4 mt-6 text-center text-[10px] text-slate-400">
+    <p>© 2026 GlowyMate • Daily Skincare Bestie for Teens</p>
+  </footer>
+
+  <!-- Hubungkan ke Berkas JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
