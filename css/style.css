@@ -1,0 +1,47 @@
+/* ==========================================================================
+   GLOWYMATE CUSTOM STYLESHEET
+   ========================================================================== */
+
+/* Pengaturan Font Utama */
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Transisi Hover Kartu */
+.card-hover {
+  transition: all 0.2s ease-in-out;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+}
+
+/* Animasi Slide-Up (Muncul Perlahan) */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Custom Scrollbar untuk Chat Box GlowyBot */
+#chatMessages::-webkit-scrollbar {
+  width: 4px;
+}
+
+#chatMessages::-webkit-scrollbar-track {
+  background: #fdf2f8;
+}
+
+#chatMessages::-webkit-scrollbar-thumb {
+  background: #fbcfe8;
+  border-radius: 4px;
+}
