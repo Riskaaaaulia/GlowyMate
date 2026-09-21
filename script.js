@@ -3,7 +3,7 @@
 // CONFIGURATION & GLOBAL VARIABLES
 // ==========================================================================
 // Tempelkan URL Google Apps Script Web App kamu di bawah ini
-const GOOGLE_SHEET_API_URL = "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL";
+const GOOGLE_SHEET_API_URL = "https://script.google.com/a/macros/smk.belajar.id/s/AKfycbyJjjyU0XKTvp1do9AA2vnro8tUMaxsIG89ZXY9md099T03qxFWy4UHfdHlUpZjnkiSTA/exec";
 
 let currentUser = {
   name: "",
