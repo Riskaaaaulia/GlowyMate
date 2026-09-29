@@ -141,40 +141,7 @@
 
   </main>
 
-  <!-- ========================================================================== -->
-  <!-- 3. GLOWYBOT AI WIDGET -->
-  <!-- ========================================================================== -->
-  <div class="fixed bottom-4 right-4 z-40 max-w-[320px] w-full px-2">
-    <div id="chatBox" class="hidden bg-white rounded-2xl shadow-xl border border-pink-200 p-4 mb-3 space-y-3 animate-slide-up">
-      <div class="flex justify-between items-center border-b border-pink-100 pb-2">
-        <div class="flex items-center gap-2">
-          <span class="text-base">🤖</span>
-          <div>
-            <h4 class="font-bold text-xs text-slate-800">GlowyBot AI</h4>
-            <p class="text-[9px] text-pink-500">Asisten Skincare Remaja</p>
-          </div>
-        </div>
-        <button onclick="toggleChat()" class="text-slate-400 hover:text-slate-600 text-xs font-bold">✕</button>
-      </div>
-      
-      <div id="chatMessages" class="h-44 overflow-y-auto space-y-2 text-xs p-1">
-        <div class="bg-pink-100 text-slate-700 p-2.5 rounded-xl rounded-tl-none max-w-[85%]">
-          Halo! Ada yang ingin kamu tanyakan seputar skincare remaja? 🌸
-        </div>
-      </div>
-
-      <div class="flex gap-2">
-        <input type="text" id="chatInput" placeholder="Tanya GlowyBot..." class="w-full p-2 text-xs border border-pink-200 rounded-xl focus:outline-none focus:ring-1 focus:ring-pink-400" onkeypress="if(event.key==='Enter') sendChatMessage()">
-        <button onclick="sendChatMessage()" class="bg-pink-500 hover:bg-pink-600 text-white font-bold px-3 py-2 rounded-xl text-xs transition-all">
-          Kirim
-        </button>
-      </div>
-    </div>
-
-    <button onclick="toggleChat()" class="ml-auto flex items-center gap-2 bg-gradient-to-r from-pink-500 to-rose-400 text-white font-bold px-4 py-3 rounded-full shadow-lg hover:opacity-95 transition-all active:scale-95 text-xs">
-      <span>💬 Tanya GlowyBot</span>
-    </button>
-  </div>
+  
 
   <!-- ========================================================================== -->
   <!-- 4. MODAL ABOUT -->
