@@ -278,49 +278,6 @@ function renderProducts(products, skinType) {
   `).join("");
 }
 
-// ==========================================================================
-// GLOWYBOT AI WIDGET
-// ==========================================================================
-function toggleChat() {
-  const chatBox = document.getElementById("chatBox");
-  chatBox.classList.toggle("hidden");
-}
-
-function sendChatMessage() {
-  const input = document.getElementById("chatInput");
-  const message = input.value.trim();
-  if (!message) return;
-
-  const chatMessages = document.getElementById("chatMessages");
-
-  // Pesan Pengguna
-  chatMessages.innerHTML += `
-    <div class="bg-slate-100 text-slate-700 p-2.5 rounded-xl rounded-tr-none max-w-[85%] ml-auto text-right">
-      ${message}
-    </div>
-  `;
-
-  input.value = "";
-  chatMessages.scrollTop = chatMessages.scrollHeight;
-
-  // Respon Otomatis Bot
-  setTimeout(() => {
-    let reply = "Untuk hasil perawatan maksimal, pastikan kamu selalu mencuci muka 2x sehari dan memakai sunscreen ya! 🌸";
-    
-    if (message.toLowerCase().includes("jerawat")) {
-      reply = "Untuk jerawat remaja, cari kandungan Salicylic Acid atau Tea Tree, dan hindari memencet jerawat ya!";
-    } else if (message.toLowerCase().includes("kering")) {
-      reply = "Kulit kering butuh pelembab dengan kandungan Hyaluronic Acid atau Ceramide!";
-    }
-
-    chatMessages.innerHTML += `
-      <div class="bg-pink-100 text-slate-700 p-2.5 rounded-xl rounded-tl-none max-w-[85%]">
-        ${reply}
-      </div>
-    `;
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-  }, 600);
-}
 
 // ==========================================================================
 // MODAL ABOUT
