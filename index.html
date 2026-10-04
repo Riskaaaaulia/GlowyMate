@@ -14,7 +14,7 @@
   <!-- Hubungkan ke Berkas CSS Eksternal (Folder css/style.css) -->
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="bg-rose-50/50 text-slate-800 min-h-screen flex flex-col justify-between selection:bg-pink-200">
+<body class="bg-rose-50/50 text-slate-800 min-h-screen flex flex-col justify-between selection:bg-pink-200 pb-16">
 
   <!-- ========================================================================== -->
   <!-- 1. HEADER & NAVBAR -->
@@ -34,7 +34,7 @@
   <!-- ========================================================================== -->
   <!-- 2. KONTEN UTAMA -->
   <!-- ========================================================================== -->
-  <main class="max-w-md mx-auto p-4 space-y-5 flex-grow w-full">
+  <main class="max-w-md mx-auto p-4 space-y-5 flex-grow w-full pb-20">
 
     <!-- A. KARTU PROFIL PENGGUNA (LOCALSTORAGE) -->
     <section id="userSection" class="bg-white p-5 rounded-2xl shadow-sm border border-pink-100 card-hover animate-slide-up">
@@ -122,7 +122,7 @@
       </div>
 
       <!-- 4. Daftar Rekomendasi Produk -->
-      <div>
+      <div id="produkSection">
         <h3 class="font-bold text-slate-800 text-xs mb-3 flex justify-between items-center">
           <span>🛍️ Rekomendasi Produk Aman</span>
           <span class="text-[10px] text-pink-500 font-normal">Sesuai Usia & Kulit</span>
@@ -141,7 +141,38 @@
 
   </main>
 
-  
+  <!-- ========================================================================== -->
+  <!-- 3. BOTTOM NAVIGATION TAB BAR -->
+  <!-- ========================================================================== -->
+  <nav class="fixed bottom-0 left-0 right-0 z-40 bg-white/90 backdrop-blur-md border-t border-pink-100 shadow-lg">
+    <div class="max-w-md mx-auto grid grid-cols-4 py-2 px-1 text-center">
+      
+      <!-- Tab Beranda -->
+      <button onclick="navigateTo('userSection')" class="nav-btn flex flex-col items-center gap-0.5 text-pink-500 font-bold transition-all">
+        <span class="text-lg">🏠</span>
+        <span class="text-[10px]">Beranda</span>
+      </button>
+
+      <!-- Tab Kuis -->
+      <button onclick="navigateTo('quizSection')" class="nav-btn flex flex-col items-center gap-0.5 text-slate-400 hover:text-pink-500 transition-all">
+        <span class="text-lg">📝</span>
+        <span class="text-[10px]">Kuis</span>
+      </button>
+
+      <!-- Tab Produk -->
+      <button onclick="navigateTo('resultSection')" class="nav-btn flex flex-col items-center gap-0.5 text-slate-400 hover:text-pink-500 transition-all">
+        <span class="text-lg">🛍️</span>
+        <span class="text-[10px]">Produk</span>
+      </button>
+
+      <!-- Tab Tentang -->
+      <button onclick="openAboutModal()" class="nav-btn flex flex-col items-center gap-0.5 text-slate-400 hover:text-pink-500 transition-all">
+        <span class="text-lg">ℹ️</span>
+        <span class="text-[10px]">Lainnya</span>
+      </button>
+
+    </div>
+  </nav>
 
   <!-- ========================================================================== -->
   <!-- 4. MODAL ABOUT -->
@@ -166,11 +197,25 @@
   <!-- ========================================================================== -->
   <!-- 5. FOOTER & SCRIPT HUBUNGAN -->
   <!-- ========================================================================== -->
-  <footer class="bg-white border-t border-pink-100 py-4 mt-6 text-center text-[10px] text-slate-400">
+  <footer class="bg-white border-t border-pink-100 py-4 mb-12 text-center text-[10px] text-slate-400">
     <p>© 2026 GlowyMate • Daily Skincare Bestie for Teens</p>
   </footer>
 
   <!-- Hubungkan ke Berkas JavaScript -->
   <script src="script.js"></script>
+
+  <!-- Script Pembantu Navigasi Smooth Scroll (Opsional / Dapat Dipindah ke script.js) -->
+  <script>
+    function navigateTo(elementId) {
+      const el = document.getElementById(elementId);
+      if (el) {
+        // Jika bagian masih tersembunyi (seperti resultSection), tampilkan sementara
+        if (el.classList.contains('hidden')) {
+          el.classList.remove('hidden');
+        }
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  </script>
 </body>
 </html>
